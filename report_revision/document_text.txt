@@ -1,0 +1,1126 @@
+BLOCK 0 PARA:                                          
+  IMAGES [{"rid": "rId5", "target": "media/image1.png"}]
+BLOCK 1 PARA: 
+BLOCK 2 PARA: 
+BLOCK 3 PARA: 
+BLOCK 4 PARA: 
+BLOCK 5 PARA: 
+BLOCK 6 PARA: 
+BLOCK 7 PARA: 
+BLOCK 8 PARA: 
+BLOCK 9 PARA: MCP Server 工厂与连接器
+BLOCK 10 PARA: MCP Server 工厂与连接器自测报告
+BLOCK 11 PARA: 
+BLOCK 12 PARA: 
+BLOCK 13 PARA: 
+BLOCK 14 PARA: 
+BLOCK 15 PARA: 
+BLOCK 16 PARA: 产品名称 神谕者 MCP Server 工厂与连接器
+BLOCK 17 PARA: 测试范围 OpenAPI 转 MCP 连接器鉴权 复用与审计
+BLOCK 18 PARA: 文档版本 V1.1 按指定模板修订
+BLOCK 19 PARA: 编制岗位 高级测试工程师
+BLOCK 20 PARA: 编制日期 2026年10月12日
+BLOCK 21 PARA: 
+BLOCK 22 PARA: 
+BLOCK 23 PARA: 
+BLOCK 24 PARA: 
+BLOCK 25 PARA: 
+BLOCK 26 PARA: MCP Server 工厂与连接器自测报告
+BLOCK 27 PARA: 本报告围绕 OpenAPI 转 MCP、连接器鉴权、可复用性、MCP 调用审计和连接器订阅审计列出 45 条用例。截至 2026 年 10 月 12 日，完整通过 0 条、部分验证 14 条、失败 2 条、未执行 29 条。每条用例均附关联的比赛系统页面截图；相同页面截图在相关用例中复用。截图仅证明页面当时的显示内容，测试结论仍以本条步骤和证据记录为准。
+BLOCK 28 PARA: 测试概述
+BLOCK 29 ROW 0 CELL 0: 范围
+BLOCK 29 ROW 0 CELL 1: 45 条：生成质量 12、连接器鉴权 10、可复用性 8、MCP 调用审计 8、连接器订阅审计 7。以工单和 CRM 两套真实服务为接入样本。
+BLOCK 29 ROW 1 CELL 0: 环境
+BLOCK 29 ROW 1 CELL 1: 比赛系统 10.1.124.12:9707；普通账号 13900002021、管理员 13800000000；2026 年 10 月 12 日，北京时间。工单 28080 与 CRM 28081 为既有材料所列源系统地址，本轮未独立对账。
+BLOCK 29 ROW 2 CELL 0: 统计
+BLOCK 29 ROW 2 CELL 1: 设计 45 条；完整通过 0 条、部分验证 14 条、失败 2 条、未执行 29 条。每条用例附关联页面截图；4 张本轮实际页面截图在相关用例中复用。未执行用例中的图片为环境页面，不作为该用例执行证据。
+BLOCK 29 ROW 3 CELL 0: 工单结果
+BLOCK 29 ROW 3 CELL 1: 现有工单 MCP 的 queryTickets(page=1,size=5) 只读调用返回 5 条、业务码 0；未将数据与工单源系统独立核对，也未在本轮新生成服务。
+BLOCK 29 ROW 4 CELL 0: CRM结果
+BLOCK 29 ROW 4 CELL 1: 现有 CRM MCP 的 Crm_contract(id=16) 只读调用业务码 0；未将字段与 CRM 源系统独立核对，也未在本轮新生成服务。
+BLOCK 29 ROW 5 CELL 0: 审计结果
+BLOCK 29 ROW 5 CELL 1: 管理员可查到本轮成功调用；普通账号本人 MCP 调用审计为 0。无效 tokenId 调用返回 isError=true，但审计误记 success，errorReason 为空。
+BLOCK 29 ROW 6 CELL 0: 条件结论
+BLOCK 29 ROW 6 CELL 1: AIGW-032 和 AIGW-034 未通过。先修复并复测审计缺陷，再补齐 29 条未开始及 14 条部分验证用例的完整步骤和证据；当前不建议放行。
+BLOCK 30 PARA: 结果总览
+BLOCK 31 ROW 0 CELL 0: AIGW-001 待执行
+BLOCK 31 ROW 0 CELL 1: Swagger URL 导入标准 OpenAPI
+BLOCK 31 ROW 1 CELL 0: AIGW-002 部分验证
+BLOCK 31 ROW 1 CELL 1: OpenAPI JSON 文件导入
+BLOCK 31 ROW 2 CELL 0: AIGW-003 部分验证
+BLOCK 31 ROW 2 CELL 1: OpenAPI YAML 文件导入
+BLOCK 31 ROW 3 CELL 0: AIGW-004 部分验证
+BLOCK 31 ROW 3 CELL 1: 非法文档拒绝
+BLOCK 31 ROW 4 CELL 0: AIGW-005 待执行
+BLOCK 31 ROW 4 CELL 1: 重复 operationId 冲突
+BLOCK 31 ROW 5 CELL 0: AIGW-006 待执行
+BLOCK 31 ROW 5 CELL 1: 路径查询请求体参数映射
+BLOCK 31 ROW 6 CELL 0: AIGW-007 待执行
+BLOCK 31 ROW 6 CELL 1: 枚举与嵌套对象映射
+BLOCK 31 ROW 7 CELL 0: AIGW-008 待执行
+BLOCK 31 ROW 7 CELL 1: 同名路径不同方法映射
+BLOCK 31 ROW 8 CELL 0: AIGW-009 待执行
+BLOCK 31 ROW 8 CELL 1: 上游错误与超时表达
+BLOCK 31 ROW 9 CELL 0: AIGW-010 部分验证
+BLOCK 31 ROW 9 CELL 1: 生成后工具直连与业务真值
+BLOCK 31 ROW 10 CELL 0: AIGW-011 部分验证
+BLOCK 31 ROW 10 CELL 1: 两套真实系统接入案例
+BLOCK 31 ROW 11 CELL 0: AIGW-012 待执行
+BLOCK 31 ROW 11 CELL 1: 生成前后差异与版本追踪
+BLOCK 31 ROW 12 CELL 0: AIGW-013 待执行
+BLOCK 31 ROW 12 CELL 1: API Key 正确凭证调用
+BLOCK 31 ROW 13 CELL 0: AIGW-014 待执行
+BLOCK 31 ROW 13 CELL 1: 缺失 API Key 拒绝
+BLOCK 31 ROW 14 CELL 0: AIGW-015 待执行
+BLOCK 31 ROW 14 CELL 1: 错误与吊销 API Key 拒绝
+BLOCK 31 ROW 15 CELL 0: AIGW-016 待执行
+BLOCK 31 ROW 15 CELL 1: API Key 跨连接器隔离
+BLOCK 31 ROW 16 CELL 0: AIGW-017 待执行
+BLOCK 31 ROW 16 CELL 1: OAuth 授权码正常交换
+BLOCK 31 ROW 17 CELL 0: AIGW-018 待执行
+BLOCK 31 ROW 17 CELL 1: OAuth state 与重放防护
+BLOCK 31 ROW 18 CELL 0: AIGW-019 待执行
+BLOCK 31 ROW 18 CELL 1: OAuth 过期与撤销
+BLOCK 31 ROW 19 CELL 0: AIGW-020 待执行
+BLOCK 31 ROW 19 CELL 1: 普通用户越权读取
+BLOCK 31 ROW 20 CELL 0: AIGW-021 部分验证
+BLOCK 31 ROW 20 CELL 1: 凭证显示与审计脱敏
+BLOCK 31 ROW 21 CELL 0: AIGW-022 待执行
+BLOCK 31 ROW 21 CELL 1: 凭证切换和回滚
+BLOCK 31 ROW 22 CELL 0: AIGW-023 部分验证
+BLOCK 31 ROW 22 CELL 1: 工单与 CRM 服务分别发布
+BLOCK 31 ROW 23 CELL 0: AIGW-024 待执行
+BLOCK 31 ROW 23 CELL 1: 不同账号订阅同一服务
+BLOCK 31 ROW 24 CELL 0: AIGW-025 待执行
+BLOCK 31 ROW 24 CELL 1: 重复订阅幂等
+BLOCK 31 ROW 25 CELL 0: AIGW-026 待执行
+BLOCK 31 ROW 25 CELL 1: 退订后调用隔离
+BLOCK 31 ROW 26 CELL 0: AIGW-027 待执行
+BLOCK 31 ROW 26 CELL 1: 版本升级兼容
+BLOCK 31 ROW 27 CELL 0: AIGW-028 待执行
+BLOCK 31 ROW 27 CELL 1: 跨服务工具编排
+BLOCK 31 ROW 28 CELL 0: AIGW-029 待执行
+BLOCK 31 ROW 28 CELL 1: 导入导出再部署
+BLOCK 31 ROW 29 CELL 0: AIGW-030 待执行
+BLOCK 31 ROW 29 CELL 1: 助理重复绑定与解绑恢复
+BLOCK 31 ROW 30 CELL 0: AIGW-031 部分验证
+BLOCK 31 ROW 30 CELL 1: 成功调用落审计
+BLOCK 31 ROW 31 CELL 0: AIGW-032 失败
+BLOCK 31 ROW 31 CELL 1: 失败调用落审计
+BLOCK 31 ROW 32 CELL 0: AIGW-033 待执行
+BLOCK 31 ROW 32 CELL 1: 调用链与原会话关联
+BLOCK 31 ROW 33 CELL 0: AIGW-034 失败
+BLOCK 31 ROW 33 CELL 1: 审计列表筛选分页
+BLOCK 31 ROW 34 CELL 0: AIGW-035 待执行
+BLOCK 31 ROW 34 CELL 1: 审计详情时间耗时
+BLOCK 31 ROW 35 CELL 0: AIGW-036 部分验证
+BLOCK 31 ROW 35 CELL 1: 多用户审计权限
+BLOCK 31 ROW 36 CELL 0: AIGW-037 待执行
+BLOCK 31 ROW 36 CELL 1: 审计导出范围一致
+BLOCK 31 ROW 37 CELL 0: AIGW-038 待执行
+BLOCK 31 ROW 37 CELL 1: 重试去重与幂等关联
+BLOCK 31 ROW 38 CELL 0: AIGW-039 部分验证
+BLOCK 31 ROW 38 CELL 1: 首次订阅落审计
+BLOCK 31 ROW 39 CELL 0: AIGW-040 部分验证
+BLOCK 31 ROW 39 CELL 1: 退订落审计
+BLOCK 31 ROW 40 CELL 0: AIGW-041 待执行
+BLOCK 31 ROW 40 CELL 1: 重复订阅失败记录
+BLOCK 31 ROW 41 CELL 0: AIGW-042 待执行
+BLOCK 31 ROW 41 CELL 1: 审批与授权过程追踪
+BLOCK 31 ROW 42 CELL 0: AIGW-043 部分验证
+BLOCK 31 ROW 42 CELL 1: 跨账号订阅数据隔离
+BLOCK 31 ROW 43 CELL 0: AIGW-044 部分验证
+BLOCK 31 ROW 43 CELL 1: 审计筛选与时间边界
+BLOCK 31 ROW 44 CELL 0: AIGW-045 部分验证
+BLOCK 31 ROW 44 CELL 1: 订阅审计与调用审计闭环
+BLOCK 32 PARA: AIGW-001 Swagger URL 导入标准 OpenAPI
+BLOCK 33 ROW 0 CELL 0: 测试目的
+BLOCK 33 ROW 0 CELL 1: 验证Swagger URL 导入标准 OpenAPI。可解析版本、路径、方法和参数；工具数与所选 operation 数一致；不生成未选接口
+BLOCK 33 ROW 1 CELL 0: 预置条件
+BLOCK 33 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 33 ROW 2 CELL 0: 测试步骤
+BLOCK 33 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 在隔离命名空间输入工单 OpenAPI 地址；预览接口；选择只读查询接口生成。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 33 ROW 3 CELL 0: 预期结果
+BLOCK 33 ROW 3 CELL 1: 可解析版本、路径、方法和参数；工具数与所选 operation 数一致；不生成未选接口
+BLOCK 33 ROW 4 CELL 0: 测试环境截图
+BLOCK 33 ROW 4 CELL 1: MCP Server 工厂入口及现有服务列表，swagger导入
+  IMAGES [{"rid": "rId6", "target": "media/image2.png"}]
+BLOCK 33 ROW 5 CELL 0: 生产环境截图
+BLOCK 33 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 33 ROW 6 CELL 0: 测试结果
+BLOCK 33 ROW 6 CELL 1: 后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 33 ROW 7 CELL 0: 验证证据
+BLOCK 33 ROW 7 CELL 1: 证据待归档；McpHttpController.read-swagger; 
+BLOCK 33 ROW 8 CELL 0: 上线风险
+BLOCK 33 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 33 ROW 9 CELL 0: 用例编号
+BLOCK 33 ROW 9 CELL 1: AIGW-001  P0  验证成功
+BLOCK 34 PARA: AIGW-002 OpenAPI JSON 文件导入
+BLOCK 35 ROW 0 CELL 0: 测试目的
+BLOCK 35 ROW 0 CELL 1: 验证OpenAPI JSON 文件导入。工具名称、方法、路径及必填参数一致；无重复工具
+BLOCK 35 ROW 1 CELL 0: 预置条件
+BLOCK 35 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 35 ROW 2 CELL 0: 测试步骤
+BLOCK 35 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 上传同一工单契约 JSON；生成并与 URL 方式结果对照。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 35 ROW 3 CELL 0: 预期结果
+BLOCK 35 ROW 3 CELL 1: 工具名称、方法、路径及必填参数一致；无重复工具
+BLOCK 35 ROW 4 CELL 0: 测试环境截图
+BLOCK 35 ROW 4 CELL 1: 图 AIGW-002-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId7", "target": "media/image3.png"}]
+BLOCK 35 ROW 5 CELL 0: 生产环境截图
+BLOCK 35 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 35 ROW 6 CELL 0: 测试结果
+BLOCK 35 ROW 6 CELL 1: 部分验证。隔离 JSON OpenAPI 样例由 read-file 返回业务码 0，解析出 2 个 paths；未创建 MCP 或核对生成工具。
+BLOCK 35 ROW 7 CELL 0: 验证证据
+BLOCK 35 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；McpHttpController.read-file; McpInnerService；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 35 ROW 8 CELL 0: 上线风险
+BLOCK 35 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 35 ROW 9 CELL 0: 用例编号
+BLOCK 35 ROW 9 CELL 1: AIGW-002  P0  验证成功
+BLOCK 36 PARA: AIGW-003 OpenAPI YAML 文件导入
+BLOCK 37 ROW 0 CELL 0: 测试目的
+BLOCK 37 ROW 0 CELL 1: 验证OpenAPI YAML 文件导入。解析成功；工具数量与 JSON 等价；中文描述不乱码
+BLOCK 37 ROW 1 CELL 0: 预置条件
+BLOCK 37 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 37 ROW 2 CELL 0: 测试步骤
+BLOCK 37 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 上传等价 YAML 契约并预览生成结果。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 37 ROW 3 CELL 0: 预期结果
+BLOCK 37 ROW 3 CELL 1: 解析成功；工具数量与 JSON 等价；中文描述不乱码
+BLOCK 37 ROW 4 CELL 0: 测试环境截图
+BLOCK 37 ROW 4 CELL 1: 图 AIGW-003-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 37 ROW 5 CELL 0: 生产环境截图
+BLOCK 37 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 37 ROW 6 CELL 0: 测试结果
+BLOCK 37 ROW 6 CELL 1: 部分验证。等价 YAML 样例由 read-file 返回业务码 0，解析出 2 个 paths；未创建 MCP 或核对生成工具。
+BLOCK 37 ROW 7 CELL 0: 验证证据
+BLOCK 37 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；McpHttpController.read-file；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 37 ROW 8 CELL 0: 上线风险
+BLOCK 37 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 37 ROW 9 CELL 0: 用例编号
+BLOCK 37 ROW 9 CELL 1: AIGW-003  P1  部分验证
+BLOCK 38 PARA: AIGW-004 非法文档拒绝
+BLOCK 39 ROW 0 CELL 0: 测试目的
+BLOCK 39 ROW 0 CELL 1: 验证非法文档拒绝。给出明确错误；不创建半成品服务或工具
+BLOCK 39 ROW 1 CELL 0: 预置条件
+BLOCK 39 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 39 ROW 2 CELL 0: 测试步骤
+BLOCK 39 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 分别上传空文件、非 JSON/YAML 文本、缺 paths 文档。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 39 ROW 3 CELL 0: 预期结果
+BLOCK 39 ROW 3 CELL 1: 给出明确错误；不创建半成品服务或工具
+BLOCK 39 ROW 4 CELL 0: 测试环境截图
+BLOCK 39 ROW 4 CELL 1: 图 AIGW-004-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 39 ROW 5 CELL 0: 生产环境截图
+BLOCK 39 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 39 ROW 6 CELL 0: 测试结果
+BLOCK 39 ROW 6 CELL 1: 部分验证。.txt 非法扩展名返回业务码 300 和文件类型错误；空文件、缺 paths 及无半成品检查未做。
+BLOCK 39 ROW 7 CELL 0: 验证证据
+BLOCK 39 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；McpHttpController.read-file; McpTestSessionService；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 39 ROW 8 CELL 0: 上线风险
+BLOCK 39 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 39 ROW 9 CELL 0: 用例编号
+BLOCK 39 ROW 9 CELL 1: AIGW-004  P0  部分验证
+BLOCK 40 PARA: AIGW-005 重复 operationId 冲突
+BLOCK 41 ROW 0 CELL 0: 测试目的
+BLOCK 41 ROW 0 CELL 1: 验证重复 operationId 冲突。工具标识唯一且可追溯原接口；如拒绝须明确指出冲突位置
+BLOCK 41 ROW 1 CELL 0: 预置条件
+BLOCK 41 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 41 ROW 2 CELL 0: 测试步骤
+BLOCK 41 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 上传含重复 operationId 的隔离契约；查看工具清单。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 41 ROW 3 CELL 0: 预期结果
+BLOCK 41 ROW 3 CELL 1: 工具标识唯一且可追溯原接口；如拒绝须明确指出冲突位置
+BLOCK 41 ROW 4 CELL 0: 测试环境截图
+BLOCK 41 ROW 4 CELL 1: 图 AIGW-005-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 41 ROW 5 CELL 0: 生产环境截图
+BLOCK 41 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 41 ROW 6 CELL 0: 测试结果
+BLOCK 41 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 41 ROW 7 CELL 0: 验证证据
+BLOCK 41 ROW 7 CELL 1: 证据待归档；McpInnerService; openapi/factory.py；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 41 ROW 8 CELL 0: 上线风险
+BLOCK 41 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 41 ROW 9 CELL 0: 用例编号
+BLOCK 41 ROW 9 CELL 1: AIGW-005  P1  待执行
+BLOCK 42 PARA: AIGW-006 路径查询请求体参数映射
+BLOCK 43 ROW 0 CELL 0: 测试目的
+BLOCK 43 ROW 0 CELL 1: 验证路径查询请求体参数映射。必填项、类型、默认值和位置正确；缺必填参数时报可理解错误
+BLOCK 43 ROW 1 CELL 0: 预置条件
+BLOCK 43 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 43 ROW 2 CELL 0: 测试步骤
+BLOCK 43 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 以包含 path/query/header/body 的测试契约生成工具；查看 schema 并调用。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 43 ROW 3 CELL 0: 预期结果
+BLOCK 43 ROW 3 CELL 1: 必填项、类型、默认值和位置正确；缺必填参数时报可理解错误
+BLOCK 43 ROW 4 CELL 0: 测试环境截图
+BLOCK 43 ROW 4 CELL 1: 图 AIGW-006-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 43 ROW 5 CELL 0: 生产环境截图
+BLOCK 43 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 43 ROW 6 CELL 0: 测试结果
+BLOCK 43 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 43 ROW 7 CELL 0: 验证证据
+BLOCK 43 ROW 7 CELL 1: 证据待归档；openapi/factory.py; McpTestSessionService；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 43 ROW 8 CELL 0: 上线风险
+BLOCK 43 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 43 ROW 9 CELL 0: 用例编号
+BLOCK 43 ROW 9 CELL 1: AIGW-006  P0  待执行
+BLOCK 44 PARA: AIGW-007 枚举与嵌套对象映射
+BLOCK 45 ROW 0 CELL 0: 测试目的
+BLOCK 45 ROW 0 CELL 1: 验证枚举与嵌套对象映射。schema 保留枚举及对象结构；非法值受校验；合法值原样送源接口
+BLOCK 45 ROW 1 CELL 0: 预置条件
+BLOCK 45 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 45 ROW 2 CELL 0: 测试步骤
+BLOCK 45 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 用枚举、数组和嵌套对象契约生成；传合法与越界值。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 45 ROW 3 CELL 0: 预期结果
+BLOCK 45 ROW 3 CELL 1: schema 保留枚举及对象结构；非法值受校验；合法值原样送源接口
+BLOCK 45 ROW 4 CELL 0: 测试环境截图
+BLOCK 45 ROW 4 CELL 1: 图 AIGW-007-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 45 ROW 5 CELL 0: 生产环境截图
+BLOCK 45 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 45 ROW 6 CELL 0: 测试结果
+BLOCK 45 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 45 ROW 7 CELL 0: 验证证据
+BLOCK 45 ROW 7 CELL 1: 证据待归档；openapi/factory.py；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 45 ROW 8 CELL 0: 上线风险
+BLOCK 45 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 45 ROW 9 CELL 0: 用例编号
+BLOCK 45 ROW 9 CELL 1: AIGW-007  P1  待执行
+BLOCK 46 PARA: AIGW-008 同名路径不同方法映射
+BLOCK 47 ROW 0 CELL 0: 测试目的
+BLOCK 47 ROW 0 CELL 1: 验证同名路径不同方法映射。形成可区分的两个工具；请求方法及参数没有串用
+BLOCK 47 ROW 1 CELL 0: 预置条件
+BLOCK 47 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 47 ROW 2 CELL 0: 测试步骤
+BLOCK 47 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 对同一路径 GET 与 POST 生成工具并分别调用。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 47 ROW 3 CELL 0: 预期结果
+BLOCK 47 ROW 3 CELL 1: 形成可区分的两个工具；请求方法及参数没有串用
+BLOCK 47 ROW 4 CELL 0: 测试环境截图
+BLOCK 47 ROW 4 CELL 1: 图 AIGW-008-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 47 ROW 5 CELL 0: 生产环境截图
+BLOCK 47 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 47 ROW 6 CELL 0: 测试结果
+BLOCK 47 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 47 ROW 7 CELL 0: 验证证据
+BLOCK 47 ROW 7 CELL 1: 证据待归档；openapi/factory.py；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 47 ROW 8 CELL 0: 上线风险
+BLOCK 47 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 47 ROW 9 CELL 0: 用例编号
+BLOCK 47 ROW 9 CELL 1: AIGW-008  P0  待执行
+BLOCK 48 PARA: AIGW-009 上游错误与超时表达
+BLOCK 49 ROW 0 CELL 0: 测试目的
+BLOCK 49 ROW 0 CELL 1: 验证上游错误与超时表达。工具结果保留错误类别及可定位信息；不伪造成功业务答案
+BLOCK 49 ROW 1 CELL 0: 预置条件
+BLOCK 49 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 49 ROW 2 CELL 0: 测试步骤
+BLOCK 49 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 测试源接口分别返回 4xx、5xx、超时；调用生成工具。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 49 ROW 3 CELL 0: 预期结果
+BLOCK 49 ROW 3 CELL 1: 工具结果保留错误类别及可定位信息；不伪造成功业务答案
+BLOCK 49 ROW 4 CELL 0: 测试环境截图
+BLOCK 49 ROW 4 CELL 1: 图 AIGW-009-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 49 ROW 5 CELL 0: 生产环境截图
+BLOCK 49 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 49 ROW 6 CELL 0: 测试结果
+BLOCK 49 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 49 ROW 7 CELL 0: 验证证据
+BLOCK 49 ROW 7 CELL 1: 证据待归档；McpTestSessionService; proxy_transport_factory.py；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 49 ROW 8 CELL 0: 上线风险
+BLOCK 49 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 49 ROW 9 CELL 0: 用例编号
+BLOCK 49 ROW 9 CELL 1: AIGW-009  P0  待执行
+BLOCK 50 PARA: AIGW-010 生成后工具直连与业务真值
+BLOCK 51 ROW 0 CELL 0: 测试目的
+BLOCK 51 ROW 0 CELL 1: 验证生成后工具直连与业务真值。工单编号、状态与合同金额一致；无数据时明确为空，不编造记录
+BLOCK 51 ROW 1 CELL 0: 预置条件
+BLOCK 51 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 51 ROW 2 CELL 0: 测试步骤
+BLOCK 51 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 调用工单 queryTickets 和 CRM 合同查询；与源系统同身份快照核对。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 51 ROW 3 CELL 0: 预期结果
+BLOCK 51 ROW 3 CELL 1: 工单编号、状态与合同金额一致；无数据时明确为空，不编造记录
+BLOCK 51 ROW 4 CELL 0: 测试环境截图
+BLOCK 51 ROW 4 CELL 1: 图 AIGW-010-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 51 ROW 5 CELL 0: 生产环境截图
+BLOCK 51 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 51 ROW 6 CELL 0: 测试结果
+BLOCK 51 ROW 6 CELL 1: 部分验证。普通账号现有工单 MCP queryTickets(page=1,size=5) 和 CRM MCP Crm_contract(id=16) 两次 tools/call 均 HTTP 200、RPC 无错误、isError=false、业务码 0；工单返回 5 条。未核对新生成服务及源系统独立真值。
+BLOCK 51 ROW 7 CELL 0: 验证证据
+BLOCK 51 ROW 7 CELL 1: 见 03 本轮复测证据摘要.json 与 04 缺陷复现记录.md；ConnectivityTestController; McpTestSessionService；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 51 ROW 8 CELL 0: 上线风险
+BLOCK 51 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 51 ROW 9 CELL 0: 用例编号
+BLOCK 51 ROW 9 CELL 1: AIGW-010  P0  部分验证
+BLOCK 52 PARA: AIGW-011 两套真实系统接入案例
+BLOCK 53 ROW 0 CELL 0: 测试目的
+BLOCK 53 ROW 0 CELL 1: 验证两套真实系统接入案例。两套服务各有独立地址、工具和成功调用证据；相互不串数据
+BLOCK 53 ROW 1 CELL 0: 预置条件
+BLOCK 53 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 53 ROW 2 CELL 0: 测试步骤
+BLOCK 53 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 分别用工单、CRM OpenAPI 生成服务；记录工具清单及实际调用。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 53 ROW 3 CELL 0: 预期结果
+BLOCK 53 ROW 3 CELL 1: 两套服务各有独立地址、工具和成功调用证据；相互不串数据
+BLOCK 53 ROW 4 CELL 0: 测试环境截图
+BLOCK 53 ROW 4 CELL 1: 图 AIGW-011-1  比赛系统实测截图，2026-10-12 16:49:47（北京时间），普通账号 zhangmin。普通用户连接器列表显示工单列表查询与 crm信息查询；证明现有两套连接器可见，不证明本轮新生成。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 53 ROW 5 CELL 0: 生产环境截图
+BLOCK 53 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 53 ROW 6 CELL 0: 测试结果
+BLOCK 53 ROW 6 CELL 1: 部分验证。普通账号现有工单 3 工具、CRM 32 工具；两套服务各完成一次只读 tools/call，均业务码 0。未在本轮从源 OpenAPI 新生成服务。
+BLOCK 53 ROW 7 CELL 0: 验证证据
+BLOCK 53 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；competition-demo/unified/README.md; McpInnerService；截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 53 ROW 8 CELL 0: 上线风险
+BLOCK 53 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 53 ROW 9 CELL 0: 用例编号
+BLOCK 53 ROW 9 CELL 1: AIGW-011  P0  部分验证
+BLOCK 54 PARA: AIGW-012 生成前后差异与版本追踪
+BLOCK 55 ROW 0 CELL 0: 测试目的
+BLOCK 55 ROW 0 CELL 1: 验证生成前后差异与版本追踪。仅新增对应工具；旧版本仍可定位；记录修改原因及前后数量
+BLOCK 55 ROW 1 CELL 0: 预置条件
+BLOCK 55 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 55 ROW 2 CELL 0: 测试步骤
+BLOCK 55 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 保存初版契约；新增一个只读 operation 后生成新版本；比较工具清单。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 55 ROW 3 CELL 0: 预期结果
+BLOCK 55 ROW 3 CELL 1: 仅新增对应工具；旧版本仍可定位；记录修改原因及前后数量
+BLOCK 55 ROW 4 CELL 0: 测试环境截图
+BLOCK 55 ROW 4 CELL 1: 图 AIGW-012-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP Server 广场与现有服务列表。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 55 ROW 5 CELL 0: 生产环境截图
+BLOCK 55 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 55 ROW 6 CELL 0: 测试结果
+BLOCK 55 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 55 ROW 7 CELL 0: 验证证据
+BLOCK 55 ROW 7 CELL 1: 证据待归档；McpController; McpInnerService；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 55 ROW 8 CELL 0: 上线风险
+BLOCK 55 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 55 ROW 9 CELL 0: 用例编号
+BLOCK 55 ROW 9 CELL 1: AIGW-012  P1  待执行
+BLOCK 56 PARA: AIGW-013 API Key 正确凭证调用
+BLOCK 57 ROW 0 CELL 0: 测试目的
+BLOCK 57 ROW 0 CELL 1: 验证API Key 正确凭证调用。上游鉴权成功；只返回该身份授权数据；密钥不出现在响应
+BLOCK 57 ROW 1 CELL 0: 预置条件
+BLOCK 57 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 57 ROW 2 CELL 0: 测试步骤
+BLOCK 57 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 配置隔离工单连接器的有效 API Key；执行查询工具。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 57 ROW 3 CELL 0: 预期结果
+BLOCK 57 ROW 3 CELL 1: 上游鉴权成功；只返回该身份授权数据；密钥不出现在响应
+BLOCK 57 ROW 4 CELL 0: 测试环境截图
+BLOCK 57 ROW 4 CELL 1: 图 AIGW-013-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 57 ROW 5 CELL 0: 生产环境截图
+BLOCK 57 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 57 ROW 6 CELL 0: 测试结果
+BLOCK 57 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 57 ROW 7 CELL 0: 验证证据
+BLOCK 57 ROW 7 CELL 1: 证据待归档；McpCredentialController; McpAccessService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 57 ROW 8 CELL 0: 上线风险
+BLOCK 57 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 57 ROW 9 CELL 0: 用例编号
+BLOCK 57 ROW 9 CELL 1: AIGW-013  P0  待执行
+BLOCK 58 PARA: AIGW-014 缺失 API Key 拒绝
+BLOCK 59 ROW 0 CELL 0: 测试目的
+BLOCK 59 ROW 0 CELL 1: 验证缺失 API Key 拒绝。鉴权失败且无业务数据；日志仅记录安全的失败原因
+BLOCK 59 ROW 1 CELL 0: 预置条件
+BLOCK 59 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 59 ROW 2 CELL 0: 测试步骤
+BLOCK 59 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 移除测试连接器凭证；再次执行相同查询。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 59 ROW 3 CELL 0: 预期结果
+BLOCK 59 ROW 3 CELL 1: 鉴权失败且无业务数据；日志仅记录安全的失败原因
+BLOCK 59 ROW 4 CELL 0: 测试环境截图
+BLOCK 59 ROW 4 CELL 1: 图 AIGW-014-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 59 ROW 5 CELL 0: 生产环境截图
+BLOCK 59 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 59 ROW 6 CELL 0: 测试结果
+BLOCK 59 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 59 ROW 7 CELL 0: 验证证据
+BLOCK 59 ROW 7 CELL 1: 证据待归档；McpCredentialController; McpAccessService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 59 ROW 8 CELL 0: 上线风险
+BLOCK 59 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 59 ROW 9 CELL 0: 用例编号
+BLOCK 59 ROW 9 CELL 1: AIGW-014  P0  待执行
+BLOCK 60 PARA: AIGW-015 错误与吊销 API Key 拒绝
+BLOCK 61 ROW 0 CELL 0: 测试目的
+BLOCK 61 ROW 0 CELL 1: 验证错误与吊销 API Key 拒绝。均被拒绝；吊销后原 Key 不再有效
+BLOCK 61 ROW 1 CELL 0: 预置条件
+BLOCK 61 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 61 ROW 2 CELL 0: 测试步骤
+BLOCK 61 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 分别使用错误、已吊销 Key 调用同一工具。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 61 ROW 3 CELL 0: 预期结果
+BLOCK 61 ROW 3 CELL 1: 均被拒绝；吊销后原 Key 不再有效
+BLOCK 61 ROW 4 CELL 0: 测试环境截图
+BLOCK 61 ROW 4 CELL 1: 图 AIGW-015-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 61 ROW 5 CELL 0: 生产环境截图
+BLOCK 61 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 61 ROW 6 CELL 0: 测试结果
+BLOCK 61 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 61 ROW 7 CELL 0: 验证证据
+BLOCK 61 ROW 7 CELL 1: 证据待归档；McpCredentialController; McpAccessService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 61 ROW 8 CELL 0: 上线风险
+BLOCK 61 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 61 ROW 9 CELL 0: 用例编号
+BLOCK 61 ROW 9 CELL 1: AIGW-015  P0  待执行
+BLOCK 62 PARA: AIGW-016 API Key 跨连接器隔离
+BLOCK 63 ROW 0 CELL 0: 测试目的
+BLOCK 63 ROW 0 CELL 1: 验证API Key 跨连接器隔离。交叉调用失败；不因同一平台登录态绕过上游授权
+BLOCK 63 ROW 1 CELL 0: 预置条件
+BLOCK 63 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 63 ROW 2 CELL 0: 测试步骤
+BLOCK 63 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 将工单 Key 用于 CRM，CRM Key 用于工单。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 63 ROW 3 CELL 0: 预期结果
+BLOCK 63 ROW 3 CELL 1: 交叉调用失败；不因同一平台登录态绕过上游授权
+BLOCK 63 ROW 4 CELL 0: 测试环境截图
+BLOCK 63 ROW 4 CELL 1: 图 AIGW-016-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 63 ROW 5 CELL 0: 生产环境截图
+BLOCK 63 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 63 ROW 6 CELL 0: 测试结果
+BLOCK 63 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 63 ROW 7 CELL 0: 验证证据
+BLOCK 63 ROW 7 CELL 1: 证据待归档；McpAccessService; McpCredentialService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 63 ROW 8 CELL 0: 上线风险
+BLOCK 63 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 63 ROW 9 CELL 0: 用例编号
+BLOCK 63 ROW 9 CELL 1: AIGW-016  P0  待执行
+BLOCK 64 PARA: AIGW-017 OAuth 授权码正常交换
+BLOCK 65 ROW 0 CELL 0: 测试目的
+BLOCK 65 ROW 0 CELL 1: 验证OAuth 授权码正常交换。回调绑定发起人；授权码仅用一次；查询使用本人授权
+BLOCK 65 ROW 1 CELL 0: 预置条件
+BLOCK 65 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 65 ROW 2 CELL 0: 测试步骤
+BLOCK 65 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 普通用户对测试连接器发起授权；完成回调；执行本人范围查询。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 65 ROW 3 CELL 0: 预期结果
+BLOCK 65 ROW 3 CELL 1: 回调绑定发起人；授权码仅用一次；查询使用本人授权
+BLOCK 65 ROW 4 CELL 0: 测试环境截图
+BLOCK 65 ROW 4 CELL 1: 图 AIGW-017-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 65 ROW 5 CELL 0: 生产环境截图
+BLOCK 65 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 65 ROW 6 CELL 0: 测试结果
+BLOCK 65 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 65 ROW 7 CELL 0: 验证证据
+BLOCK 65 ROW 7 CELL 1: 证据待归档；McpOAuthController; McpOAuthService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 65 ROW 8 CELL 0: 上线风险
+BLOCK 65 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 65 ROW 9 CELL 0: 用例编号
+BLOCK 65 ROW 9 CELL 1: AIGW-017  P0  待执行
+BLOCK 66 PARA: AIGW-018 OAuth state 与重放防护
+BLOCK 67 ROW 0 CELL 0: 测试目的
+BLOCK 67 ROW 0 CELL 1: 验证OAuth state 与重放防护。均拒绝；无令牌写入其他用户凭证记录
+BLOCK 67 ROW 1 CELL 0: 预置条件
+BLOCK 67 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 67 ROW 2 CELL 0: 测试步骤
+BLOCK 67 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 篡改 state、跨账号完成回调、重放已使用授权码。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 67 ROW 3 CELL 0: 预期结果
+BLOCK 67 ROW 3 CELL 1: 均拒绝；无令牌写入其他用户凭证记录
+BLOCK 67 ROW 4 CELL 0: 测试环境截图
+BLOCK 67 ROW 4 CELL 1: 图 AIGW-018-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 67 ROW 5 CELL 0: 生产环境截图
+BLOCK 67 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 67 ROW 6 CELL 0: 测试结果
+BLOCK 67 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 67 ROW 7 CELL 0: 验证证据
+BLOCK 67 ROW 7 CELL 1: 证据待归档；McpOAuthController; McpOAuthService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 67 ROW 8 CELL 0: 上线风险
+BLOCK 67 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 67 ROW 9 CELL 0: 用例编号
+BLOCK 67 ROW 9 CELL 1: AIGW-018  P0  待执行
+BLOCK 68 PARA: AIGW-019 OAuth 过期与撤销
+BLOCK 69 ROW 0 CELL 0: 测试目的
+BLOCK 69 ROW 0 CELL 1: 验证OAuth 过期与撤销。过期可按设计刷新或明确失败；撤销后不可继续调用
+BLOCK 69 ROW 1 CELL 0: 预置条件
+BLOCK 69 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 69 ROW 2 CELL 0: 测试步骤
+BLOCK 69 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 在隔离授权中使用过期令牌；撤销授权后再调用。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 69 ROW 3 CELL 0: 预期结果
+BLOCK 69 ROW 3 CELL 1: 过期可按设计刷新或明确失败；撤销后不可继续调用
+BLOCK 69 ROW 4 CELL 0: 测试环境截图
+BLOCK 69 ROW 4 CELL 1: 图 AIGW-019-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 69 ROW 5 CELL 0: 生产环境截图
+BLOCK 69 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 69 ROW 6 CELL 0: 测试结果
+BLOCK 69 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 69 ROW 7 CELL 0: 验证证据
+BLOCK 69 ROW 7 CELL 1: 证据待归档；McpOAuthService; McpCredentialController；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 69 ROW 8 CELL 0: 上线风险
+BLOCK 69 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 69 ROW 9 CELL 0: 用例编号
+BLOCK 69 ROW 9 CELL 1: AIGW-019  P0  待执行
+BLOCK 70 PARA: AIGW-020 普通用户越权读取
+BLOCK 71 ROW 0 CELL 0: 测试目的
+BLOCK 71 ROW 0 CELL 1: 验证普通用户越权读取。无越权数据；直接 MCP 与助理问答边界一致
+BLOCK 71 ROW 1 CELL 0: 预置条件
+BLOCK 71 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 71 ROW 2 CELL 0: 测试步骤
+BLOCK 71 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 用普通账号调用管理员或他人专属工单与 CRM 记录。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 71 ROW 3 CELL 0: 预期结果
+BLOCK 71 ROW 3 CELL 1: 无越权数据；直接 MCP 与助理问答边界一致
+BLOCK 71 ROW 4 CELL 0: 测试环境截图
+BLOCK 71 ROW 4 CELL 1: 图 AIGW-020-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 71 ROW 5 CELL 0: 生产环境截图
+BLOCK 71 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 71 ROW 6 CELL 0: 测试结果
+BLOCK 71 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 71 ROW 7 CELL 0: 验证证据
+BLOCK 71 ROW 7 CELL 1: 证据待归档；McpAccessService; McpTestSessionService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 71 ROW 8 CELL 0: 上线风险
+BLOCK 71 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 71 ROW 9 CELL 0: 用例编号
+BLOCK 71 ROW 9 CELL 1: AIGW-020  P0  待执行
+BLOCK 72 PARA: AIGW-021 凭证显示与审计脱敏
+BLOCK 73 ROW 0 CELL 0: 测试目的
+BLOCK 73 ROW 0 CELL 1: 验证凭证显示与审计脱敏。仅掩码展示；密钥、授权码、访问令牌不落可见日志
+BLOCK 73 ROW 1 CELL 0: 预置条件
+BLOCK 73 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 73 ROW 2 CELL 0: 测试步骤
+BLOCK 73 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 保存测试 Key 后查看详情、导出日志及失败审计。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 73 ROW 3 CELL 0: 预期结果
+BLOCK 73 ROW 3 CELL 1: 仅掩码展示；密钥、授权码、访问令牌不落可见日志
+BLOCK 73 ROW 4 CELL 0: 测试环境截图
+BLOCK 73 ROW 4 CELL 1: 图 AIGW-021-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 73 ROW 5 CELL 0: 生产环境截图
+BLOCK 73 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 73 ROW 6 CELL 0: 测试结果
+BLOCK 73 ROW 6 CELL 1: 部分验证。普通账号读取连接器 270 的 OAuth 详情，返回配置键但未见密钥字段；API Key 保存、审计和导出脱敏未做。
+BLOCK 73 ROW 7 CELL 0: 验证证据
+BLOCK 73 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；McpCredentialService; LogController；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 73 ROW 8 CELL 0: 上线风险
+BLOCK 73 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 73 ROW 9 CELL 0: 用例编号
+BLOCK 73 ROW 9 CELL 1: AIGW-021  P0  部分验证
+BLOCK 74 PARA: AIGW-022 凭证切换和回滚
+BLOCK 75 ROW 0 CELL 0: 测试目的
+BLOCK 75 ROW 0 CELL 1: 验证凭证切换和回滚。调用身份随选择变化；旧凭证失效时不自动降级到未授权身份
+BLOCK 75 ROW 1 CELL 0: 预置条件
+BLOCK 75 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 75 ROW 2 CELL 0: 测试步骤
+BLOCK 75 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 在隔离连接器中新建第二凭证并切换；再切回有效凭证。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 75 ROW 3 CELL 0: 预期结果
+BLOCK 75 ROW 3 CELL 1: 调用身份随选择变化；旧凭证失效时不自动降级到未授权身份
+BLOCK 75 ROW 4 CELL 0: 测试环境截图
+BLOCK 75 ROW 4 CELL 1: 图 AIGW-022-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器列表与现有连接器。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 75 ROW 5 CELL 0: 生产环境截图
+BLOCK 75 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 75 ROW 6 CELL 0: 测试结果
+BLOCK 75 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 75 ROW 7 CELL 0: 验证证据
+BLOCK 75 ROW 7 CELL 1: 证据待归档；McpCredentialController.switch; McpCredentialService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 75 ROW 8 CELL 0: 上线风险
+BLOCK 75 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 75 ROW 9 CELL 0: 用例编号
+BLOCK 75 ROW 9 CELL 1: AIGW-022  P1  待执行
+BLOCK 76 PARA: AIGW-023 工单与 CRM 服务分别发布
+BLOCK 77 ROW 0 CELL 0: 测试目的
+BLOCK 77 ROW 0 CELL 1: 验证工单与 CRM 服务分别发布。发布后可独立发现和调用；源服务与工具归属清晰
+BLOCK 77 ROW 1 CELL 0: 预置条件
+BLOCK 77 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 77 ROW 2 CELL 0: 测试步骤
+BLOCK 77 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 把已验证的两个只读 MCP 发布至测试目录；检查地址与工具。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 77 ROW 3 CELL 0: 预期结果
+BLOCK 77 ROW 3 CELL 1: 发布后可独立发现和调用；源服务与工具归属清晰
+BLOCK 77 ROW 4 CELL 0: 测试环境截图
+BLOCK 77 ROW 4 CELL 1: 图 AIGW-023-1  比赛系统实测截图，2026-10-12 16:49:47（北京时间），普通账号 zhangmin。普通用户连接器列表显示两套既有服务；发布流程及版本仍待单独验证。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 77 ROW 5 CELL 0: 生产环境截图
+BLOCK 77 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 77 ROW 6 CELL 0: 测试结果
+BLOCK 77 ROW 6 CELL 1: 部分验证。普通账号可见 10 个连接器，工单和 CRM 工具清单独立；本轮未发布新服务。
+BLOCK 77 ROW 7 CELL 0: 验证证据
+BLOCK 77 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；McpSquareService; McpSubscribeService；截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 77 ROW 8 CELL 0: 上线风险
+BLOCK 77 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 77 ROW 9 CELL 0: 用例编号
+BLOCK 77 ROW 9 CELL 1: AIGW-023  P0  部分验证
+BLOCK 78 PARA: AIGW-024 不同账号订阅同一服务
+BLOCK 79 ROW 0 CELL 0: 测试目的
+BLOCK 79 ROW 0 CELL 1: 验证不同账号订阅同一服务。共享服务定义但凭证、订阅记录和可见数据按用户隔离
+BLOCK 79 ROW 1 CELL 0: 预置条件
+BLOCK 79 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 79 ROW 2 CELL 0: 测试步骤
+BLOCK 79 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 管理员和普通用户分别订阅同一工单 MCP；核对实例。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 79 ROW 3 CELL 0: 预期结果
+BLOCK 79 ROW 3 CELL 1: 共享服务定义但凭证、订阅记录和可见数据按用户隔离
+BLOCK 79 ROW 4 CELL 0: 测试环境截图
+BLOCK 79 ROW 4 CELL 1: 图 AIGW-024-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器或 MCP Server 入口。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 79 ROW 5 CELL 0: 生产环境截图
+BLOCK 79 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 79 ROW 6 CELL 0: 测试结果
+BLOCK 79 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 79 ROW 7 CELL 0: 验证证据
+BLOCK 79 ROW 7 CELL 1: 证据待归档；McpSubscribeController; McpSubscribeService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 79 ROW 8 CELL 0: 上线风险
+BLOCK 79 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 79 ROW 9 CELL 0: 用例编号
+BLOCK 79 ROW 9 CELL 1: AIGW-024  P0  待执行
+BLOCK 80 PARA: AIGW-025 重复订阅幂等
+BLOCK 81 ROW 0 CELL 0: 测试目的
+BLOCK 81 ROW 0 CELL 1: 验证重复订阅幂等。不产生重复有效实例或重复授权；界面与记录一致
+BLOCK 81 ROW 1 CELL 0: 预置条件
+BLOCK 81 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 81 ROW 2 CELL 0: 测试步骤
+BLOCK 81 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 同一用户连续订阅同一版本两次。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 81 ROW 3 CELL 0: 预期结果
+BLOCK 81 ROW 3 CELL 1: 不产生重复有效实例或重复授权；界面与记录一致
+BLOCK 81 ROW 4 CELL 0: 测试环境截图
+BLOCK 81 ROW 4 CELL 1: 图 AIGW-025-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器或 MCP Server 入口。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 81 ROW 5 CELL 0: 生产环境截图
+BLOCK 81 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 81 ROW 6 CELL 0: 测试结果
+BLOCK 81 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 81 ROW 7 CELL 0: 验证证据
+BLOCK 81 ROW 7 CELL 1: 证据待归档；McpSubscribeService; McpSimpleSubscribeService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 81 ROW 8 CELL 0: 上线风险
+BLOCK 81 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 81 ROW 9 CELL 0: 用例编号
+BLOCK 81 ROW 9 CELL 1: AIGW-025  P1  待执行
+BLOCK 82 PARA: AIGW-026 退订后调用隔离
+BLOCK 83 ROW 0 CELL 0: 测试目的
+BLOCK 83 ROW 0 CELL 1: 验证退订后调用隔离。退订实例不再可用；另一用户及服务定义不受影响
+BLOCK 83 ROW 1 CELL 0: 预置条件
+BLOCK 83 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 83 ROW 2 CELL 0: 测试步骤
+BLOCK 83 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 普通用户退订测试服务；重新发起工具调用。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 83 ROW 3 CELL 0: 预期结果
+BLOCK 83 ROW 3 CELL 1: 退订实例不再可用；另一用户及服务定义不受影响
+BLOCK 83 ROW 4 CELL 0: 测试环境截图
+BLOCK 83 ROW 4 CELL 1: 图 AIGW-026-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器或 MCP Server 入口。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 83 ROW 5 CELL 0: 生产环境截图
+BLOCK 83 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 83 ROW 6 CELL 0: 测试结果
+BLOCK 83 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 83 ROW 7 CELL 0: 验证证据
+BLOCK 83 ROW 7 CELL 1: 证据待归档；McpSubscribeController; McpSubscribeService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 83 ROW 8 CELL 0: 上线风险
+BLOCK 83 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 83 ROW 9 CELL 0: 用例编号
+BLOCK 83 ROW 9 CELL 1: AIGW-026  P0  待执行
+BLOCK 84 PARA: AIGW-027 版本升级兼容
+BLOCK 85 ROW 0 CELL 0: 测试目的
+BLOCK 85 ROW 0 CELL 1: 验证版本升级兼容。兼容旧调用；新版本可识别；版本和订阅关系可追踪
+BLOCK 85 ROW 1 CELL 0: 预置条件
+BLOCK 85 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 85 ROW 2 CELL 0: 测试步骤
+BLOCK 85 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 在测试服务新版本新增可选字段；两个订阅者分别调用旧新工具。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 85 ROW 3 CELL 0: 预期结果
+BLOCK 85 ROW 3 CELL 1: 兼容旧调用；新版本可识别；版本和订阅关系可追踪
+BLOCK 85 ROW 4 CELL 0: 测试环境截图
+BLOCK 85 ROW 4 CELL 1: 图 AIGW-027-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器或 MCP Server 入口。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 85 ROW 5 CELL 0: 生产环境截图
+BLOCK 85 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 85 ROW 6 CELL 0: 测试结果
+BLOCK 85 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 85 ROW 7 CELL 0: 验证证据
+BLOCK 85 ROW 7 CELL 1: 证据待归档；McpController; McpSubscribeService；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 85 ROW 8 CELL 0: 上线风险
+BLOCK 85 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 85 ROW 9 CELL 0: 用例编号
+BLOCK 85 ROW 9 CELL 1: AIGW-027  P1  待执行
+BLOCK 86 PARA: AIGW-028 跨服务工具编排
+BLOCK 87 ROW 0 CELL 0: 测试目的
+BLOCK 87 ROW 0 CELL 1: 验证跨服务工具编排。两工具来源可见；结果分别与源记录一致；失败工具不污染另一工具
+BLOCK 87 ROW 1 CELL 0: 预置条件
+BLOCK 87 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 87 ROW 2 CELL 0: 测试步骤
+BLOCK 87 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 选取工单查询和 CRM 合同查询编排为新服务；执行只读组合问题。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 87 ROW 3 CELL 0: 预期结果
+BLOCK 87 ROW 3 CELL 1: 两工具来源可见；结果分别与源记录一致；失败工具不污染另一工具
+BLOCK 87 ROW 4 CELL 0: 测试环境截图
+BLOCK 87 ROW 4 CELL 1: 图 AIGW-028-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器或 MCP Server 入口。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 87 ROW 5 CELL 0: 生产环境截图
+BLOCK 87 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 87 ROW 6 CELL 0: 测试结果
+BLOCK 87 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 87 ROW 7 CELL 0: 验证证据
+BLOCK 87 ROW 7 CELL 1: 证据待归档；McpOrchestrateController; McpOrchestrateService；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 87 ROW 8 CELL 0: 上线风险
+BLOCK 87 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 87 ROW 9 CELL 0: 用例编号
+BLOCK 87 ROW 9 CELL 1: AIGW-028  P1  待执行
+BLOCK 88 PARA: AIGW-029 导入导出再部署
+BLOCK 89 ROW 0 CELL 0: 测试目的
+BLOCK 89 ROW 0 CELL 1: 验证导入导出再部署。工具 schema 与源配置一致；凭证不随配置明文迁移
+BLOCK 89 ROW 1 CELL 0: 预置条件
+BLOCK 89 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 89 ROW 2 CELL 0: 测试步骤
+BLOCK 89 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 导出测试 MCP 配置并在隔离命名空间导入；执行工具。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 89 ROW 3 CELL 0: 预期结果
+BLOCK 89 ROW 3 CELL 1: 工具 schema 与源配置一致；凭证不随配置明文迁移
+BLOCK 89 ROW 4 CELL 0: 测试环境截图
+BLOCK 89 ROW 4 CELL 1: 图 AIGW-029-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器或 MCP Server 入口。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId9", "target": "media/image5.png"}]
+BLOCK 89 ROW 5 CELL 0: 生产环境截图
+BLOCK 89 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 89 ROW 6 CELL 0: 测试结果
+BLOCK 89 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 89 ROW 7 CELL 0: 验证证据
+BLOCK 89 ROW 7 CELL 1: 证据待归档；McpServerlessController; McpCredentialService；关联页面截图：证据截图/20261012_164947_普通用户连接器列表.png
+BLOCK 89 ROW 8 CELL 0: 上线风险
+BLOCK 89 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 89 ROW 9 CELL 0: 用例编号
+BLOCK 89 ROW 9 CELL 1: AIGW-029  P1  待执行
+BLOCK 90 PARA: AIGW-030 助理重复绑定与解绑恢复
+BLOCK 91 ROW 0 CELL 0: 测试目的
+BLOCK 91 ROW 0 CELL 1: 验证助理重复绑定与解绑恢复。两服务可共同使用；解绑仅移除对应能力；重绑恢复
+BLOCK 91 ROW 1 CELL 0: 预置条件
+BLOCK 91 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 91 ROW 2 CELL 0: 测试步骤
+BLOCK 91 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 普通用户把工单和 CRM MCP 绑定助理；解绑工单再重绑。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 91 ROW 3 CELL 0: 预期结果
+BLOCK 91 ROW 3 CELL 1: 两服务可共同使用；解绑仅移除对应能力；重绑恢复
+BLOCK 91 ROW 4 CELL 0: 测试环境截图
+BLOCK 91 ROW 4 CELL 1: 图 AIGW-030-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器或 MCP Server 入口。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId8", "target": "media/image4.png"}]
+BLOCK 91 ROW 5 CELL 0: 生产环境截图
+BLOCK 91 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 91 ROW 6 CELL 0: 测试结果
+BLOCK 91 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 91 ROW 7 CELL 0: 验证证据
+BLOCK 91 ROW 7 CELL 1: 证据待归档；runtime-sources/de/agent/dto/AgentMcpRef.java; 既有MCP-004/007；关联页面截图：证据截图/20261012_165201_普通用户MCP广场.png
+BLOCK 91 ROW 8 CELL 0: 上线风险
+BLOCK 91 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 91 ROW 9 CELL 0: 用例编号
+BLOCK 91 ROW 9 CELL 1: AIGW-030  P1  待执行
+BLOCK 92 PARA: AIGW-031 成功调用落审计
+BLOCK 93 ROW 0 CELL 0: 测试目的
+BLOCK 93 ROW 0 CELL 1: 验证成功调用落审计。仅对应调用有审计记录；服务、工具、调用人、时间、结果可关联
+BLOCK 93 ROW 1 CELL 0: 预置条件
+BLOCK 93 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 93 ROW 2 CELL 0: 测试步骤
+BLOCK 93 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 执行带唯一测试标记的工单工具；按时间与标记查询。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 93 ROW 3 CELL 0: 预期结果
+BLOCK 93 ROW 3 CELL 1: 仅对应调用有审计记录；服务、工具、调用人、时间、结果可关联
+BLOCK 93 ROW 4 CELL 0: 测试环境截图
+BLOCK 93 ROW 4 CELL 1: 图 AIGW-031-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP 调用审计页面。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId10", "target": "media/image6.png"}]
+BLOCK 93 ROW 5 CELL 0: 生产环境截图
+BLOCK 93 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 93 ROW 6 CELL 0: 测试结果
+BLOCK 93 ROW 6 CELL 1: 部分验证。两套只读 tools/call 成功，管理员 MCP 审计列表可见 zhangmin 的 queryTickets 和 Crm_contract 成功记录；普通账号本人列表为 0，故不能认定端到端通过。
+BLOCK 93 ROW 7 CELL 0: 验证证据
+BLOCK 93 ROW 7 CELL 1: 见 03 本轮复测证据摘要.json 与 04 缺陷复现记录.md；app/middleware/audit.py; app/api/audit.py；关联页面截图：证据截图/20261012_165203_普通用户MCP调用审计.png
+BLOCK 93 ROW 8 CELL 0: 上线风险
+BLOCK 93 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 93 ROW 9 CELL 0: 用例编号
+BLOCK 93 ROW 9 CELL 1: AIGW-031  P0  部分验证
+BLOCK 94 PARA: AIGW-032 失败调用落审计
+BLOCK 95 ROW 0 CELL 0: 测试目的
+BLOCK 95 ROW 0 CELL 1: 验证失败调用落审计。失败状态与错误类别保留；业务数据与凭证不泄漏
+BLOCK 95 ROW 1 CELL 0: 预置条件
+BLOCK 95 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 95 ROW 2 CELL 0: 测试步骤
+BLOCK 95 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 用错误 Key 和非法参数各触发一次失败。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 95 ROW 3 CELL 0: 预期结果
+BLOCK 95 ROW 3 CELL 1: 失败状态与错误类别保留；业务数据与凭证不泄漏
+BLOCK 95 ROW 4 CELL 0: 测试环境截图
+BLOCK 95 ROW 4 CELL 1: 图 AIGW-032-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP 调用审计页面。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId10", "target": "media/image6.png"}]
+BLOCK 95 ROW 5 CELL 0: 生产环境截图
+BLOCK 95 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 95 ROW 6 CELL 0: 测试结果
+BLOCK 95 ROW 6 CELL 1: 失败。使用无效 tokenId=0 和唯一 keyword=AIGW_NEG_20261012_0818 调用 queryTickets，MCP 返回 isError=true；管理员审计中找到唯一对应行，但 status=success、errorReason 为空。
+BLOCK 95 ROW 7 CELL 0: 验证证据
+BLOCK 95 ROW 7 CELL 1: 见 03 本轮复测证据摘要.json 与 04 缺陷复现记录.md；app/services/audit/recorder.py; LogController；关联页面截图：证据截图/20261012_165203_普通用户MCP调用审计.png
+BLOCK 95 ROW 8 CELL 0: 上线风险
+BLOCK 95 ROW 8 CELL 1: 阻断审计能力验收；修复后需按相同账号、工具和失败条件复测，并核对本人视角及管理员视角。
+BLOCK 95 ROW 9 CELL 0: 用例编号
+BLOCK 95 ROW 9 CELL 1: AIGW-032  P0  失败
+BLOCK 96 PARA: AIGW-033 调用链与原会话关联
+BLOCK 97 ROW 0 CELL 0: 测试目的
+BLOCK 97 ROW 0 CELL 1: 验证调用链与原会话关联。问句、run_id、工具和服务可按同一调用关联；原会话可回看
+BLOCK 97 ROW 1 CELL 0: 预置条件
+BLOCK 97 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 97 ROW 2 CELL 0: 测试步骤
+BLOCK 97 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 从普通用户助理提问触发 MCP；查看 Agent 审计与 MCP 审计。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 97 ROW 3 CELL 0: 预期结果
+BLOCK 97 ROW 3 CELL 1: 问句、run_id、工具和服务可按同一调用关联；原会话可回看
+BLOCK 97 ROW 4 CELL 0: 测试环境截图
+BLOCK 97 ROW 4 CELL 1: 图 AIGW-033-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP 调用审计页面。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId10", "target": "media/image6.png"}]
+BLOCK 97 ROW 5 CELL 0: 生产环境截图
+BLOCK 97 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 97 ROW 6 CELL 0: 测试结果
+BLOCK 97 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 97 ROW 7 CELL 0: 验证证据
+BLOCK 97 ROW 7 CELL 1: 证据待归档；AuditController; app/middleware/audit.py；关联页面截图：证据截图/20261012_165203_普通用户MCP调用审计.png
+BLOCK 97 ROW 8 CELL 0: 上线风险
+BLOCK 97 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 97 ROW 9 CELL 0: 用例编号
+BLOCK 97 ROW 9 CELL 1: AIGW-033  P0  待执行
+BLOCK 98 PARA: AIGW-034 审计列表筛选分页
+BLOCK 99 ROW 0 CELL 0: 测试目的
+BLOCK 99 ROW 0 CELL 1: 验证审计列表筛选分页。分页总数与筛选结果一致；时间按 Asia/Shanghai 解释
+BLOCK 99 ROW 1 CELL 0: 预置条件
+BLOCK 99 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 99 ROW 2 CELL 0: 测试步骤
+BLOCK 99 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 按服务、工具、调用人、时间及状态筛选；翻页。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 99 ROW 3 CELL 0: 预期结果
+BLOCK 99 ROW 3 CELL 1: 分页总数与筛选结果一致；时间按 Asia/Shanghai 解释
+BLOCK 99 ROW 4 CELL 0: 测试环境截图
+BLOCK 99 ROW 4 CELL 1: 图 AIGW-034-1  比赛系统实测截图，2026-10-12 16:52:03（北京时间），普通账号 zhangmin。普通用户 MCP 调用审计显示共 0 次；本轮成功调用可由管理员接口审计查到，见缺陷记录。
+  IMAGES [{"rid": "rId10", "target": "media/image6.png"}]
+BLOCK 99 ROW 5 CELL 0: 生产环境截图
+BLOCK 99 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 99 ROW 6 CELL 0: 测试结果
+BLOCK 99 ROW 6 CELL 1: 失败。普通账号已成功调用 queryTickets 与 Crm_contract；按 caller=zhangmin 查询 MCP 调用审计总数仍为 0。管理员同条件可查 64 条，并能看到本轮记录；本人审计不可见。
+BLOCK 99 ROW 7 CELL 0: 验证证据
+BLOCK 99 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；LogController; AuditQuery；截图：证据截图/20261012_165203_普通用户MCP调用审计.png
+BLOCK 99 ROW 8 CELL 0: 上线风险
+BLOCK 99 ROW 8 CELL 1: 阻断审计能力验收；修复后需按相同账号、工具和失败条件复测，并核对本人视角及管理员视角。
+BLOCK 99 ROW 9 CELL 0: 用例编号
+BLOCK 99 ROW 9 CELL 1: AIGW-034  P1  失败
+BLOCK 100 PARA: AIGW-035 审计详情时间耗时
+BLOCK 101 ROW 0 CELL 0: 测试目的
+BLOCK 101 ROW 0 CELL 1: 验证审计详情时间耗时。开始结束时间顺序正确；耗时非负；无 Token 数据显示未知
+BLOCK 101 ROW 1 CELL 0: 预置条件
+BLOCK 101 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 101 ROW 2 CELL 0: 测试步骤
+BLOCK 101 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 同一调用对照客户端计时与审计详情。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 101 ROW 3 CELL 0: 预期结果
+BLOCK 101 ROW 3 CELL 1: 开始结束时间顺序正确；耗时非负；无 Token 数据显示未知
+BLOCK 101 ROW 4 CELL 0: 测试环境截图
+BLOCK 101 ROW 4 CELL 1: 图 AIGW-035-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP 调用审计页面。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId10", "target": "media/image6.png"}]
+BLOCK 101 ROW 5 CELL 0: 生产环境截图
+BLOCK 101 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 101 ROW 6 CELL 0: 测试结果
+BLOCK 101 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 101 ROW 7 CELL 0: 验证证据
+BLOCK 101 ROW 7 CELL 1: 证据待归档；LogController; AuditProjection；关联页面截图：证据截图/20261012_165203_普通用户MCP调用审计.png
+BLOCK 101 ROW 8 CELL 0: 上线风险
+BLOCK 101 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 101 ROW 9 CELL 0: 用例编号
+BLOCK 101 ROW 9 CELL 1: AIGW-035  P1  待执行
+BLOCK 102 PARA: AIGW-036 多用户审计权限
+BLOCK 103 ROW 0 CELL 0: 测试目的
+BLOCK 103 ROW 0 CELL 1: 验证多用户审计权限。普通用户只能看本人；管理员按授权范围看；直接 ID 不越权
+BLOCK 103 ROW 1 CELL 0: 预置条件
+BLOCK 103 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 103 ROW 2 CELL 0: 测试步骤
+BLOCK 103 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 普通账号查询本人及他人调用 ID；管理员查询测试范围。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 103 ROW 3 CELL 0: 预期结果
+BLOCK 103 ROW 3 CELL 1: 普通用户只能看本人；管理员按授权范围看；直接 ID 不越权
+BLOCK 103 ROW 4 CELL 0: 测试环境截图
+BLOCK 103 ROW 4 CELL 1: 图 AIGW-036-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP 调用审计页面。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId10", "target": "media/image6.png"}]
+BLOCK 103 ROW 5 CELL 0: 生产环境截图
+BLOCK 103 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 103 ROW 6 CELL 0: 测试结果
+BLOCK 103 ROW 6 CELL 1: 部分验证。普通账号按管理员 userId 筛选 Agent 审计返回 HTTP 403，直查管理员 run 返回 HTTP 404；MCP 调用审计直查未覆盖。
+BLOCK 103 ROW 7 CELL 0: 验证证据
+BLOCK 103 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；AuditSecurityConfig; app/api/audit.py；关联页面截图：证据截图/20261012_165203_普通用户MCP调用审计.png
+BLOCK 103 ROW 8 CELL 0: 上线风险
+BLOCK 103 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 103 ROW 9 CELL 0: 用例编号
+BLOCK 103 ROW 9 CELL 1: AIGW-036  P0  部分验证
+BLOCK 104 PARA: AIGW-037 审计导出范围一致
+BLOCK 105 ROW 0 CELL 0: 测试目的
+BLOCK 105 ROW 0 CELL 1: 验证审计导出范围一致。行数、字段、时区与同条件列表一致；敏感字段脱敏
+BLOCK 105 ROW 1 CELL 0: 预置条件
+BLOCK 105 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 105 ROW 2 CELL 0: 测试步骤
+BLOCK 105 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 筛选测试时间窗并导出；对比列表与导出结果。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 105 ROW 3 CELL 0: 预期结果
+BLOCK 105 ROW 3 CELL 1: 行数、字段、时区与同条件列表一致；敏感字段脱敏
+BLOCK 105 ROW 4 CELL 0: 测试环境截图
+BLOCK 105 ROW 4 CELL 1: 图 AIGW-037-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP 调用审计页面。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId10", "target": "media/image6.png"}]
+BLOCK 105 ROW 5 CELL 0: 生产环境截图
+BLOCK 105 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 105 ROW 6 CELL 0: 测试结果
+BLOCK 105 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 105 ROW 7 CELL 0: 验证证据
+BLOCK 105 ROW 7 CELL 1: 证据待归档；LogController.export/mcp；关联页面截图：证据截图/20261012_165203_普通用户MCP调用审计.png
+BLOCK 105 ROW 8 CELL 0: 上线风险
+BLOCK 105 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 105 ROW 9 CELL 0: 用例编号
+BLOCK 105 ROW 9 CELL 1: AIGW-037  P1  待执行
+BLOCK 106 PARA: AIGW-038 重试去重与幂等关联
+BLOCK 107 ROW 0 CELL 0: 测试目的
+BLOCK 107 ROW 0 CELL 1: 验证重试去重与幂等关联。每次物理尝试可区分，业务请求 ID 可关联；不误计为两次成功
+BLOCK 107 ROW 1 CELL 0: 预置条件
+BLOCK 107 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 107 ROW 2 CELL 0: 测试步骤
+BLOCK 107 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 让测试工具超时重试一次；查询审计。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 107 ROW 3 CELL 0: 预期结果
+BLOCK 107 ROW 3 CELL 1: 每次物理尝试可区分，业务请求 ID 可关联；不误计为两次成功
+BLOCK 107 ROW 4 CELL 0: 测试环境截图
+BLOCK 107 ROW 4 CELL 1: 图 AIGW-038-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：MCP 调用审计页面。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId10", "target": "media/image6.png"}]
+BLOCK 107 ROW 5 CELL 0: 生产环境截图
+BLOCK 107 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 107 ROW 6 CELL 0: 测试结果
+BLOCK 107 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 107 ROW 7 CELL 0: 验证证据
+BLOCK 107 ROW 7 CELL 1: 证据待归档；app/middleware/audit.py; McpCallLogRepo；关联页面截图：证据截图/20261012_165203_普通用户MCP调用审计.png
+BLOCK 107 ROW 8 CELL 0: 上线风险
+BLOCK 107 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 107 ROW 9 CELL 0: 用例编号
+BLOCK 107 ROW 9 CELL 1: AIGW-038  P1  待执行
+BLOCK 108 PARA: AIGW-039 首次订阅落审计
+BLOCK 109 ROW 0 CELL 0: 测试目的
+BLOCK 109 ROW 0 CELL 1: 验证首次订阅落审计。记录订阅人、服务、版本、时间、动作和结果
+BLOCK 109 ROW 1 CELL 0: 预置条件
+BLOCK 109 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 109 ROW 2 CELL 0: 测试步骤
+BLOCK 109 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 普通用户订阅工单连接器；按订阅人查询审计。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 109 ROW 3 CELL 0: 预期结果
+BLOCK 109 ROW 3 CELL 1: 记录订阅人、服务、版本、时间、动作和结果
+BLOCK 109 ROW 4 CELL 0: 测试环境截图
+BLOCK 109 ROW 4 CELL 1: 图 AIGW-039-1  比赛系统实测截图，2026-10-12 16:52:05（北京时间），普通账号 zhangmin。普通用户订阅审计含历史订阅记录；本轮未新增订阅。
+  IMAGES [{"rid": "rId11", "target": "media/image7.png"}]
+BLOCK 109 ROW 5 CELL 0: 生产环境截图
+BLOCK 109 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 109 ROW 6 CELL 0: 测试结果
+BLOCK 109 ROW 6 CELL 1: 部分验证。普通账号订阅审计有历史记录 27 条，含 subscribe；本轮未发起新的订阅。
+BLOCK 109 ROW 7 CELL 0: 验证证据
+BLOCK 109 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；OverviewController.connector-subscription-audit; McpSubscribeService；截图：证据截图/20261012_165205_普通用户连接器订阅审计.png
+BLOCK 109 ROW 8 CELL 0: 上线风险
+BLOCK 109 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 109 ROW 9 CELL 0: 用例编号
+BLOCK 109 ROW 9 CELL 1: AIGW-039  P0  部分验证
+BLOCK 110 PARA: AIGW-040 退订落审计
+BLOCK 111 ROW 0 CELL 0: 测试目的
+BLOCK 111 ROW 0 CELL 1: 验证退订落审计。新增退订动作；保留原订阅历史；当前状态更新
+BLOCK 111 ROW 1 CELL 0: 预置条件
+BLOCK 111 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 111 ROW 2 CELL 0: 测试步骤
+BLOCK 111 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 对测试订阅执行退订；查询同一订阅链。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 111 ROW 3 CELL 0: 预期结果
+BLOCK 111 ROW 3 CELL 1: 新增退订动作；保留原订阅历史；当前状态更新
+BLOCK 111 ROW 4 CELL 0: 测试环境截图
+BLOCK 111 ROW 4 CELL 1: 图 AIGW-040-1  比赛系统实测截图，2026-10-12 16:52:05（北京时间），普通账号 zhangmin。普通用户订阅审计含历史解绑记录；本轮未新退订。
+  IMAGES [{"rid": "rId11", "target": "media/image7.png"}]
+BLOCK 111 ROW 5 CELL 0: 生产环境截图
+BLOCK 111 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 111 ROW 6 CELL 0: 测试结果
+BLOCK 111 ROW 6 CELL 1: 部分验证。普通账号历史订阅审计包含 unsubscribe，统计退订 9 次；本轮未发起退订。
+BLOCK 111 ROW 7 CELL 0: 验证证据
+BLOCK 111 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；OverviewController; McpSubscribeService；截图：证据截图/20261012_165205_普通用户连接器订阅审计.png
+BLOCK 111 ROW 8 CELL 0: 上线风险
+BLOCK 111 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 111 ROW 9 CELL 0: 用例编号
+BLOCK 111 ROW 9 CELL 1: AIGW-040  P0  部分验证
+BLOCK 112 PARA: AIGW-041 重复订阅失败记录
+BLOCK 113 ROW 0 CELL 0: 测试目的
+BLOCK 113 ROW 0 CELL 1: 验证重复订阅失败记录。审计反映幂等或拒绝结果；不伪造两次成功订阅
+BLOCK 113 ROW 1 CELL 0: 预置条件
+BLOCK 113 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 113 ROW 2 CELL 0: 测试步骤
+BLOCK 113 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 同一账号重复提交订阅请求。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 113 ROW 3 CELL 0: 预期结果
+BLOCK 113 ROW 3 CELL 1: 审计反映幂等或拒绝结果；不伪造两次成功订阅
+BLOCK 113 ROW 4 CELL 0: 测试环境截图
+BLOCK 113 ROW 4 CELL 1: 图 AIGW-041-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器订阅审计页面。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId11", "target": "media/image7.png"}]
+BLOCK 113 ROW 5 CELL 0: 生产环境截图
+BLOCK 113 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 113 ROW 6 CELL 0: 测试结果
+BLOCK 113 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 113 ROW 7 CELL 0: 验证证据
+BLOCK 113 ROW 7 CELL 1: 证据待归档；OverviewController; McpSubscribeService；关联页面截图：证据截图/20261012_165205_普通用户连接器订阅审计.png
+BLOCK 113 ROW 8 CELL 0: 上线风险
+BLOCK 113 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 113 ROW 9 CELL 0: 用例编号
+BLOCK 113 ROW 9 CELL 1: AIGW-041  P1  待执行
+BLOCK 114 PARA: AIGW-042 审批与授权过程追踪
+BLOCK 115 ROW 0 CELL 0: 测试目的
+BLOCK 115 ROW 0 CELL 1: 验证审批与授权过程追踪。申请人、审批人、决定、时间和订阅状态可串联
+BLOCK 115 ROW 1 CELL 0: 预置条件
+BLOCK 115 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 115 ROW 2 CELL 0: 测试步骤
+BLOCK 115 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 对需审批的隔离连接器提交申请、通过或拒绝。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 115 ROW 3 CELL 0: 预期结果
+BLOCK 115 ROW 3 CELL 1: 申请人、审批人、决定、时间和订阅状态可串联
+BLOCK 115 ROW 4 CELL 0: 测试环境截图
+BLOCK 115 ROW 4 CELL 1: 图 AIGW-042-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器订阅审计页面。本用例未执行，此图仅记录测试环境，不证明预期结果。
+  IMAGES [{"rid": "rId11", "target": "media/image7.png"}]
+BLOCK 115 ROW 5 CELL 0: 生产环境截图
+BLOCK 115 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 115 ROW 6 CELL 0: 测试结果
+BLOCK 115 ROW 6 CELL 1: 未执行。后续执行时记录响应码、业务字段和审计 ID。
+BLOCK 115 ROW 7 CELL 0: 验证证据
+BLOCK 115 ROW 7 CELL 1: 证据待归档；ConnectorApprovalService; PabApproveService；关联页面截图：证据截图/20261012_165205_普通用户连接器订阅审计.png
+BLOCK 115 ROW 8 CELL 0: 上线风险
+BLOCK 115 ROW 8 CELL 1: 尚未执行，不能据此判断上线风险或宣称通过。
+BLOCK 115 ROW 9 CELL 0: 用例编号
+BLOCK 115 ROW 9 CELL 1: AIGW-042  P1  待执行
+BLOCK 116 PARA: AIGW-043 跨账号订阅数据隔离
+BLOCK 117 ROW 0 CELL 0: 测试目的
+BLOCK 117 ROW 0 CELL 1: 验证跨账号订阅数据隔离。他人记录不可见；管理员按权限可查询；直接 ID 同样受控
+BLOCK 117 ROW 1 CELL 0: 预置条件
+BLOCK 117 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 117 ROW 2 CELL 0: 测试步骤
+BLOCK 117 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 普通账号访问他人订阅审计记录及详情。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 117 ROW 3 CELL 0: 预期结果
+BLOCK 117 ROW 3 CELL 1: 他人记录不可见；管理员按权限可查询；直接 ID 同样受控
+BLOCK 117 ROW 4 CELL 0: 测试环境截图
+BLOCK 117 ROW 4 CELL 1: 图 AIGW-043-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器订阅审计页面。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId11", "target": "media/image7.png"}]
+BLOCK 117 ROW 5 CELL 0: 生产环境截图
+BLOCK 117 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 117 ROW 6 CELL 0: 测试结果
+BLOCK 117 ROW 6 CELL 1: 部分验证。普通账号订阅审计 27 条均为 zhangmin，指定 subscriber=admin 返回 0；管理员视角 76 条含 admin 与 zhangmin。无详情接口直查。
+BLOCK 117 ROW 7 CELL 0: 验证证据
+BLOCK 117 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；OverviewController; McpSubscribeController；关联页面截图：证据截图/20261012_165205_普通用户连接器订阅审计.png
+BLOCK 117 ROW 8 CELL 0: 上线风险
+BLOCK 117 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 117 ROW 9 CELL 0: 用例编号
+BLOCK 117 ROW 9 CELL 1: AIGW-043  P0  部分验证
+BLOCK 118 PARA: AIGW-044 审计筛选与时间边界
+BLOCK 119 ROW 0 CELL 0: 测试目的
+BLOCK 119 ROW 0 CELL 1: 验证审计筛选与时间边界。边界记录只归属一个日期；分页与筛选一致
+BLOCK 119 ROW 1 CELL 0: 预置条件
+BLOCK 119 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 119 ROW 2 CELL 0: 测试步骤
+BLOCK 119 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 筛选订阅人和跨上海日界时间段；核对总数。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 119 ROW 3 CELL 0: 预期结果
+BLOCK 119 ROW 3 CELL 1: 边界记录只归属一个日期；分页与筛选一致
+BLOCK 119 ROW 4 CELL 0: 测试环境截图
+BLOCK 119 ROW 4 CELL 1: 图 AIGW-044-1  比赛系统实测截图，2026-10-12 16:52:05（北京时间），普通账号 zhangmin。普通用户订阅审计展示历史记录和筛选栏；筛选数据依据接口复测记录。
+  IMAGES [{"rid": "rId11", "target": "media/image7.png"}]
+BLOCK 119 ROW 5 CELL 0: 生产环境截图
+BLOCK 119 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 119 ROW 6 CELL 0: 测试结果
+BLOCK 119 ROW 6 CELL 1: 部分验证。普通账号订阅审计 27 条，20/7 跨两页；connector=CRM 返回 4 条。上海日界条件未测。
+BLOCK 119 ROW 7 CELL 0: 验证证据
+BLOCK 119 ROW 7 CELL 1: 见本目录 03 本轮复测证据摘要.json；OverviewController.connector-subscription-audit；截图：证据截图/20261012_165205_普通用户连接器订阅审计.png
+BLOCK 119 ROW 8 CELL 0: 上线风险
+BLOCK 119 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 119 ROW 9 CELL 0: 用例编号
+BLOCK 119 ROW 9 CELL 1: AIGW-044  P1  部分验证
+BLOCK 120 PARA: AIGW-045 订阅审计与调用审计闭环
+BLOCK 121 ROW 0 CELL 0: 测试目的
+BLOCK 121 ROW 0 CELL 1: 验证订阅审计与调用审计闭环。订阅、成功调用、退订、拒绝调用顺序可追溯；主体与服务 ID 一致
+BLOCK 121 ROW 1 CELL 0: 预置条件
+BLOCK 121 ROW 1 CELL 1: 隔离测试服务及可回滚配置；按本条准备有效或无效凭证、OpenAPI 契约。；工单与 CRM 只读样本；使用唯一测试标记和同身份源系统快照；敏感值不入文档。
+BLOCK 121 ROW 2 CELL 0: 测试步骤
+BLOCK 121 ROW 2 CELL 1: 1. 核实预置条件并记录账号、版本和基线。2. 订阅后调用工具，再退订后尝试调用；对照两类审计。3. 对照预期结果核查响应、权限与审计。4. 归档时间、请求标识及脱敏证据；状态变更须记录回滚。
+BLOCK 121 ROW 3 CELL 0: 预期结果
+BLOCK 121 ROW 3 CELL 1: 订阅、成功调用、退订、拒绝调用顺序可追溯；主体与服务 ID 一致
+BLOCK 121 ROW 4 CELL 0: 测试环境截图
+BLOCK 121 ROW 4 CELL 1: 图 AIGW-045-1  比赛系统页面截图（2026-10-12，普通用户 zhangmin）画面：连接器订阅审计页面。此图仅证明页面显示；接口或流程判定见下方测试结果与验证证据。
+  IMAGES [{"rid": "rId11", "target": "media/image7.png"}]
+BLOCK 121 ROW 5 CELL 0: 生产环境截图
+BLOCK 121 ROW 5 CELL 1: 未提供独立生产环境，本轮不适用。
+BLOCK 121 ROW 6 CELL 0: 测试结果
+BLOCK 121 ROW 6 CELL 1: 部分验证。历史订阅审计可查，本轮两次真实 MCP 调用成功且管理员审计可见；普通账号调用审计为 0，无法完成订阅→调用→退订闭环，且本轮未操作订退。
+BLOCK 121 ROW 7 CELL 0: 验证证据
+BLOCK 121 ROW 7 CELL 1: 见 03 本轮复测证据摘要.json 与 04 缺陷复现记录.md；OverviewController; LogController; app/middleware/audit.py；关联页面截图：证据截图/20261012_165205_普通用户连接器订阅审计.png
+BLOCK 121 ROW 8 CELL 0: 上线风险
+BLOCK 121 ROW 8 CELL 1: 仅完成部分检查，不计为整条通过；需补齐完整流程及源系统对账。
+BLOCK 121 ROW 9 CELL 0: 用例编号
+BLOCK 121 ROW 9 CELL 1: AIGW-045  P0  部分验证
+BLOCK 122 PARA: 
